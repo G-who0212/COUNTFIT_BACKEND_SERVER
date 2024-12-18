@@ -74,4 +74,5 @@ EXPOSE 80
 
 # uWSGI와 Nginx 시작
 # CMD uwsgi --ini uwsgi.ini && service nginx start
-CMD ["sh", "-c", "uwsgi --ini uwsgi.ini & nginx -g 'daemon off;'"]
+# CMD ["sh", "-c", "uwsgi --ini uwsgi.ini & nginx -g 'daemon off;'"]
+CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && uwsgi --ini uwsgi.ini & nginx -g 'daemon off;'"]
