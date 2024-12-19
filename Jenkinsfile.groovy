@@ -16,4 +16,18 @@ node {
       app.push("latest") // latest 태그로도 푸시
     }
   }
+  stage('Deploy to EC2') {
+        steps {
+            sshagent(['countfit-backend-ec2-ssh-key']) { // EC2 SSH Credential ID
+                sh '''
+                ssh -o StrictHostKeyChecking=no ubuntu@3.35.51.27 << EOF
+                docker pull gwho0212/countfit-backend:latest
+                docker stop countfit-backend || true
+                docker rm countfit-backend || true
+                docker run -d --name countfit-backend -p 80:80 gwho0212/countfit-backend:latest
+                EOF
+                '''
+            }
+        }
+  }
 }
