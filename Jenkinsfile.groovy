@@ -24,7 +24,7 @@ pipeline {
                             pip3 install -r requirements.txt
 
                             # Run Django tests
-                            python manage.py test
+                            python account_server/manage.py test
                         '''
                     }
                 }
