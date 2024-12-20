@@ -54,7 +54,7 @@ pipeline {
             steps {
                 sshagent(['countfit-backend-ec2-ssh-key']) {
                     sh '''
-ssh -o StrictHostKeyChecking=no ubuntu@3.35.51.27 <<EOF
+ssh -o StrictHostKeyChecking=no ubuntu@3.36.96.52 <<EOF
 docker pull gwho0212/countfit-backend:latest
 docker stop countfit-backend || true
 docker rm countfit-backend || true
