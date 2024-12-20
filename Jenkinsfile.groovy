@@ -8,6 +8,29 @@ pipeline {
             }
         }
 
+        stage('Run Django Tests') {
+            steps {
+                script {
+                    docker.image('python:3.12-slim').inside('-u root') {
+                        sh '''
+                            # Install system-level dependencies
+                            apt-get update && apt-get install -y \
+                                build-essential \
+                                default-libmysqlclient-dev \
+                                pkg-config
+
+                            # Install Python dependencies
+                            pip3 install --upgrade pip
+                            pip3 install -r requirements.txt
+
+                            # Run Django tests
+                            python manage.py test
+                        '''
+                    }
+                }
+            }
+        }
+
         stage('Build image') {
             steps {
                 script {
@@ -37,11 +60,9 @@ docker stop countfit-backend || true
 docker rm countfit-backend || true
 docker run -d --name countfit-backend -p 80:80 gwho0212/countfit-backend:latest
 EOF
-            '''
+                    '''
                 }
             }
         }
-
-
     }
 }

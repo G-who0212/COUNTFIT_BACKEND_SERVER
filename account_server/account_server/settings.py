@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'account',
     'corsheaders',
 ]
@@ -87,6 +88,8 @@ WSGI_APPLICATION = 'account_server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
+# local 전용
 # DATABASES = {
 #     'default': {
 #         # 'ENGINE': 'django.db.backends.sqlite3',
@@ -101,6 +104,7 @@ WSGI_APPLICATION = 'account_server.wsgi.application'
 #     }
 # }
 
+# AWS 전용
 DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
